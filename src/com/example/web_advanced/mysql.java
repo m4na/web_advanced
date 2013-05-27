@@ -3,15 +3,14 @@ package com.example.web_advanced;
 import java.sql.SQLException;
 import com.vaadin.data.util.sqlcontainer.SQLContainer;
 import com.vaadin.data.util.sqlcontainer.connection.SimpleJDBCConnectionPool;
-import com.vaadin.data.util.sqlcontainer.query.FreeformQuery;
 import com.vaadin.data.util.sqlcontainer.query.TableQuery;
-//import com.vaadin.data.util.sqlcontainer.query.generator.OracleGenerator;
 import com.vaadin.data.util.sqlcontainer.query.generator.DefaultSQLGenerator;
 
 public class mysql {
 
 	private SimpleJDBCConnectionPool connectionPool;
 	private DefaultSQLGenerator generator;
+	private TableQuery tq; // la petite nouveautÈ ici
 
 	public mysql(String server, String user, String pwd) {
 		try {
@@ -20,7 +19,6 @@ public class mysql {
 			System.out
 					.println("connection pool created for MySQL on " + server);
 		} catch (SQLException e) {
-			// Handle error
 			e.printStackTrace();
 		}
 		generator = new DefaultSQLGenerator();
@@ -30,7 +28,7 @@ public class mysql {
 		SQLContainer container = null;
 
 		try {
-			TableQuery tq = new TableQuery(tableName, connectionPool, generator);
+			tq = new TableQuery(tableName, connectionPool, generator);
 			container = new SQLContainer(tq);
 			System.out.println("container created for table " + tableName);
 
@@ -40,18 +38,12 @@ public class mysql {
 		return container;
 	}
 
-	public SQLContainer dataView(String viewName) {
-		SQLContainer container = null;
-
-		try {
-			FreeformQuery tq = new FreeformQuery("select * from " + viewName,
-					connectionPool);
-			container = new SQLContainer(tq);
-			System.out.println("container created for view " + viewName);
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return container;
+	/*******************/
+	// j'ai ajoutÈ cette fonction pour utiliser la tablequery tq dans l'autre
+	// page
+	public TableQuery getTableQuery() {
+		return tq;
 	}
+	/***********************/
+
 }
