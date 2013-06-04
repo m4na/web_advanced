@@ -14,7 +14,7 @@
   		<description>
   		Vaadin application class to start</description>
   		<param-name>application</param-name>
-  		<param-value>com.example.web_advanced.Web_advancedApplication</param-value>
+  		<param-value>com.web_advanced.controller.Web_advancedApplication</param-value>
   	</init-param>
   </servlet>
   <servlet-mapping>

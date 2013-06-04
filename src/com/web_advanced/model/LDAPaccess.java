@@ -1,13 +1,11 @@
-package com.example.web_advanced;
+package com.web_advanced.model;
 
 /**
- * accès à l'annuaire LDAP de l'ISEP
+ * acc??s ?? l'annuaire LDAP de l'ISEP
  * pour :
  * authentification des utilisateurs
  * retrouver le mail ISEP d'un utilisateur
  */
-
-import isep.menu.Libelles;
 
 import java.io.Serializable;
 import java.util.Hashtable;
@@ -23,7 +21,7 @@ public class LDAPaccess implements Serializable {
 	 * 
 	 * @param user
 	 * @param mdp
-	 * @return l'objet LDAP ou null si pas trouvé
+	 * @return l'objet LDAP ou null si pas trouv??
 	 * @throws Exception
 	 */
 
@@ -31,10 +29,10 @@ public class LDAPaccess implements Serializable {
 
 		// Initial context implementation
 		String INITCTX = "com.sun.jndi.ldap.LdapCtxFactory";
-		String MY_HOST = Libelles.getTexte("LDAP_SERVER");
-		String MGR_DN = "uid=" + user + ", " + Libelles.getTexte("LDAP_ROOT");
+		String MY_HOST = "ldap://ldap.isep.fr:389";
+		String MGR_DN = "uid=" + user + ", " + "ou=People, dc=isep.fr";
 		String MGR_PW = mdp;
-		String MY_SEARCHBASE = Libelles.getTexte("LDAP_SEARCH_BASE");
+		String MY_SEARCHBASE = "dc=isep.fr";
 		String MY_FILTER = "(uid=" + user + ")";
 
 		String login = null;
@@ -42,7 +40,7 @@ public class LDAPaccess implements Serializable {
 		String type = null;
 		String employeeNumber = null;
 		String mail = null;
-		String messageErreur = Libelles.getTexte("LOGIN_INVALIDE");
+		String messageErreur = "Login invalide";
 		try {
 
 			// Hashtable for environmental information
@@ -87,7 +85,7 @@ public class LDAPaccess implements Serializable {
 					Attribute en = sr.getAttributes().get("employeeNumber");
 					employeeNumber = (String) en.get();
 				} catch (Exception e) {
-					messageErreur = "numéro d'élève non trouvé dans l'annuaire";
+					messageErreur = "num??ro d'??l??ve non trouv?? dans l'annuaire";
 				}
 				Attribute em = sr.getAttributes().get("mail");
 				mail = (String) em.get();
@@ -106,7 +104,7 @@ public class LDAPaccess implements Serializable {
 	}
 
 	/**
-	 * récupération des informations d'un utilisateur
+	 * r??cup??ration des informations d'un utilisateur
 	 * 
 	 * @param user
 	 * @return objet LDAP ou null
@@ -116,11 +114,11 @@ public class LDAPaccess implements Serializable {
 
 		// Initial context implementation
 		String INITCTX = "com.sun.jndi.ldap.LdapCtxFactory";
-		String MY_HOST = Libelles.getTexte("LDAP_SERVER");
-		String MGR_DN = "uid=" + Libelles.getTexte("LDAP_UID") + ", "
-				+ Libelles.getTexte("LDAP_ROOT");
-		String MGR_PW = Libelles.getTexte("LDAP_PWD");
-		String MY_SEARCHBASE = Libelles.getTexte("LDAP_SEARCH_BASE");
+		String MY_HOST = "ldap://ldap.isep.fr:389";
+		String MGR_DN = "uid=" + "rman-san" + ", "
+				+ "ou=People, dc=isep.fr";
+		String MGR_PW = "255CY73y";//mot de passse moodle
+		String MY_SEARCHBASE = "dc=isep.fr";
 		String MY_FILTER = "(employeeNumber=" + numero + ")";
 
 		String login = null;
@@ -128,7 +126,7 @@ public class LDAPaccess implements Serializable {
 		String type = null;
 		String employeeNumber = null;
 		String mail = null;
-		String messageErreur = Libelles.getTexte("LOGIN_INVALIDE");
+		String messageErreur = "Login invalide";
 		try {
 
 			// Hashtable for environmental information
@@ -174,7 +172,7 @@ public class LDAPaccess implements Serializable {
 					Attribute en = sr.getAttributes().get("employeeNumber");
 					employeeNumber = (String) en.get();
 				} catch (Exception e) {
-					messageErreur = "numéro d'élève non trouvé dans l'annuaire";
+					messageErreur = "num??ro d'??l??ve non trouv?? dans l'annuaire";
 				}
 				Attribute em = sr.getAttributes().get("mail");
 				mail = (String) em.get();

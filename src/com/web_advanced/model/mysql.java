@@ -1,4 +1,4 @@
-package com.example.web_advanced;
+package com.web_advanced.model;
 
 import java.sql.SQLException;
 import com.vaadin.data.util.sqlcontainer.SQLContainer;
@@ -10,7 +10,7 @@ public class mysql {
 
 	private SimpleJDBCConnectionPool connectionPool;
 	private DefaultSQLGenerator generator;
-	private TableQuery tq; // la petite nouveautÈ ici
+	private TableQuery tq; // la petite nouveaut?? ici
 
 	public mysql(String server, String user, String pwd) {
 		try {
@@ -39,7 +39,7 @@ public class mysql {
 	}
 
 	/*******************/
-	// j'ai ajoutÈ cette fonction pour utiliser la tablequery tq dans l'autre
+	// j'ai ajout?? cette fonction pour utiliser la tablequery tq dans l'autre
 	// page
 	public TableQuery getTableQuery() {
 		return tq;

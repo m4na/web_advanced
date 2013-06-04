@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
-encoding//src/com/example/web_advanced/LDAPaccess.java=UTF-8
-encoding//src/com/example/web_advanced/Web_advancedApplication.java=UTF-8
-encoding//src/com/example/web_advanced/mysql.java=UTF-8
+encoding//src/com/web_advanced/controller/Web_advancedApplication.java=UTF-8
+encoding//src/com/web_advanced/model/LDAPObject.java=UTF-8
+encoding//src/com/web_advanced/model/LDAPaccess.java=UTF-8
+encoding//src/com/web_advanced/model/mysql.java=UTF-8
