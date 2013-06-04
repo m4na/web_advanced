@@ -8,7 +8,7 @@ public class User {
 			LDAPObject obj = LDAP_access.LDAPget(id, pwd);
 			System.out.println(obj);
 		} catch (Exception e) {
-			System.out.println("fail");
+			System.out.println("fail !");
 		}
 	}
 }
