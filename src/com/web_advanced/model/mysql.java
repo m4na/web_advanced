@@ -1,49 +1,72 @@
 package com.web_advanced.model;
 
+import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import com.vaadin.data.util.sqlcontainer.SQLContainer;
-import com.vaadin.data.util.sqlcontainer.connection.SimpleJDBCConnectionPool;
-import com.vaadin.data.util.sqlcontainer.query.TableQuery;
-import com.vaadin.data.util.sqlcontainer.query.generator.DefaultSQLGenerator;
 
-public class mysql {
+import com.mysql.jdbc.Connection;
+import com.mysql.jdbc.Statement;
 
-	private SimpleJDBCConnectionPool connectionPool;
-	private DefaultSQLGenerator generator;
-	private TableQuery tq; // la petite nouveaut?? ici
+public class Mysql {
 
-	public mysql(String server, String user, String pwd) {
+	Connection conn = null;
+	Statement st = null;
+	ResultSet rs = null;
+	
+	public Mysql() {
+		System.out.println("MySQL Connect Example.");
+		
+		String url = "jdbc:mysql://localhost:3306/";
+		String dbName = "web_advanced";
+		String driver = "com.mysql.jdbc.Driver";
+		String userName = "root";
+		String password = "root";
 		try {
-			connectionPool = new SimpleJDBCConnectionPool(
-					"com.mysql.jdbc.Driver", server, user, pwd, 2, 2);
-			System.out
-					.println("connection pool created for MySQL on " + server);
+			Class.forName(driver).newInstance();
+			conn = (Connection) DriverManager.getConnection(url + dbName,
+					userName, password);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+	
+	public ResultSet select(String sql){
+		try {
+			st = (Statement) conn.createStatement();
+			rs = st.executeQuery(sql) ; 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		generator = new DefaultSQLGenerator();
+		return rs;
 	}
-
-	public SQLContainer queryTable(String tableName) {
-		SQLContainer container = null;
-
+	
+	public int update(String sql){
+		int res = 0;
 		try {
-			tq = new TableQuery(tableName, connectionPool, generator);
-			container = new SQLContainer(tq);
-			System.out.println("container created for table " + tableName);
-
+			st = (Statement) conn.createStatement();
+			res = st.executeUpdate(sql) ; 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return container;
+		return res;
 	}
-
-	/*******************/
-	// j'ai ajout?? cette fonction pour utiliser la tablequery tq dans l'autre
-	// page
-	public TableQuery getTableQuery() {
-		return tq;
+	
+	public void closeRequest(){
+		try {
+			rs.close();
+			st.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
-	/***********************/
+	
+	public void closeConnexion(){
+		try {
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
 }
