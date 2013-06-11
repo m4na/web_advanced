@@ -20,8 +20,8 @@ public class Web_advancedApplication extends Application {
 		Controller c = new Controller(mainWindow);
 		//c.index();
 		//c.greeting();
-		c.add_project();
-
+		//c.add_project();
+		c.test();
 	}
 
 

@@ -1,58 +1,46 @@
 package com.web_advanced.view;
 
-import java.util.Arrays;
-
-import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
-import com.vaadin.ui.Form;
-import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Button.ClickListener;
+import com.vaadin.ui.TextArea;
+import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
-import com.vaadin.ui.themes.BaseTheme;
+import com.web_advanced.model.Projet;
 
-@SuppressWarnings("serial")
 public class Ajout_projet extends VerticalLayout {
+	
+	private Projet projet = new Projet();
+	private final TextField name = new TextField("Nom :");
+	private final TextArea desc = new TextArea("Description :");
+	private final TextField owner = new TextField("Propriéaire :");
+	private final TextField tutor = new TextField("Tuteur :");
+	private final TextField responsable = new TextField("Responsable :");
+	private final Button save = new Button("Ajouter");
 
 	public Ajout_projet() {
-		// Create the Form
-		final Form projectForm = new Form();
-		projectForm.setCaption("Ajouter un projet");
-		projectForm.setWriteThrough(false);
-		projectForm.setInvalidCommitted(false);
 
-		// Determines which properties are shown, and in which order:
-		projectForm.setVisibleItemProperties(Arrays.asList(new String[] {
-				"Nom du projet", "Description du projet", "Propriétaire",
-				"Responsable de projet", "Tuteur du projet", "Pièce joint" }));
-
-		// Add form to layout
-		addComponent(projectForm);
-
-		// The cancel / apply buttons
-		HorizontalLayout buttons = new HorizontalLayout();
-		buttons.setSpacing(true);
-		Button discardChanges = new Button("Discard changes",
-				new Button.ClickListener() {
-					public void buttonClick(ClickEvent event) {
-						projectForm.discard();
-					}
-				});
-		discardChanges.setStyleName(BaseTheme.BUTTON_LINK);
-		buttons.addComponent(discardChanges);
-		buttons.setComponentAlignment(discardChanges, Alignment.MIDDLE_LEFT);
-
-		Button apply = new Button("Apply", new Button.ClickListener() {
+		setSpacing(true);
+		addComponent(name);
+		addComponent(desc);
+		addComponent(owner);
+		addComponent(tutor);
+		addComponent(responsable);
+		
+		addComponent(save);
+		
+		save.addListener(new ClickListener() {
+			@Override
 			public void buttonClick(ClickEvent event) {
-				try {
-					projectForm.commit();
-				} catch (Exception e) {
-					// Ignored, we'll let the Form handle the errors
-				}
+				projet.setName(name.getValue().toString());
+				projet.setDescription(desc.getValue().toString());
+				projet.setOwner(owner.getValue().toString());
+				projet.setTutor_id(Integer.parseInt((tutor.getValue().toString())));
+				projet.setResponsible_id(Integer.parseInt((responsable.getValue().toString())));
+				projet.insert();
+
 			}
 		});
-		buttons.addComponent(apply);
-		projectForm.getFooter().addComponent(buttons);
-		projectForm.getFooter().setMargin(false, false, true, true);
-	}
 
+	}
 }

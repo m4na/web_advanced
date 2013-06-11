@@ -9,6 +9,7 @@ import com.web_advanced.model.Projet;
 import com.web_advanced.view.Ajout_projet;
 import com.web_advanced.view.Connexion;
 import com.web_advanced.view.Menu;
+import com.web_advanced.view.Test;
 
 public class Controller {
 	
@@ -31,5 +32,10 @@ public class Controller {
 	public void add_project(){
 		Ajout_projet ap = new Ajout_projet();
 		window.setContent(ap);
+	}
+	
+	public void test(){
+		Test tt = new Test();
+		window.setContent(tt);
 	}
 }
