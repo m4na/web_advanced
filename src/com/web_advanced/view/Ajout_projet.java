@@ -6,6 +6,7 @@ import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.TextArea;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
+import com.web_advanced.controller.Controller;
 import com.web_advanced.model.LDAPObject;
 import com.web_advanced.model.LDAPaccess;
 import com.web_advanced.model.Projet;
@@ -23,7 +24,7 @@ public class Ajout_projet extends VerticalLayout {
 	LDAPaccess LDAP_access = new LDAPaccess();;
 
 	
-	public Ajout_projet() {
+	public Ajout_projet(Controller controller) {
 		
 		//add the menu
 		Menu menu = new Menu();

@@ -12,7 +12,7 @@ public class ProjectsList extends VerticalLayout implements Button.ClickListener
 
 	Button add;
 	
-	public ProjectsList(){
+	public ProjectsList(final Controller controller){
 		
 		//add the menu
 		Menu menu = new Menu();
@@ -28,9 +28,7 @@ public class ProjectsList extends VerticalLayout implements Button.ClickListener
 			
 			@Override
 			public void buttonClick(ClickEvent event) {
-				Window w = new Window();
-				Controller co = new Controller(w);
-				getApplication().getMainWindow().setContent(co.addProject());
+				getApplication().getMainWindow().setContent(controller.addProject());
 				
 			}
 		});

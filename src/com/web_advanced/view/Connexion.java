@@ -1,5 +1,8 @@
 package com.web_advanced.view;
 
+import javax.servlet.http.HttpSession;
+
+import com.vaadin.terminal.gwt.server.WebApplicationContext;
 import com.vaadin.ui.LoginForm;
 import com.vaadin.ui.LoginForm.LoginEvent;
 import com.vaadin.ui.VerticalLayout;
@@ -13,7 +16,7 @@ public class Connexion extends VerticalLayout {
 	
 	private LDAPaccess LDAP_access;
 	
-	public Connexion() {
+	public Connexion(final Controller controller) {
 		
 		LoginForm login = new LoginForm();
 		login.setWidth("100%");
@@ -25,9 +28,8 @@ public class Connexion extends VerticalLayout {
 				String pwd = event.getLoginParameter("password");
 				User user = User.connexion(LDAP_access, id, pwd);
 				if(user != null){
-					Window w = new Window();
-					Controller co = new Controller(w);
-					getApplication().getMainWindow().setContent(co.projectList(user));
+					
+					getApplication().getMainWindow().setContent(controller.projectList(user));
 				}
 			}
 		});
