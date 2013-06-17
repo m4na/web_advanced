@@ -1,15 +1,9 @@
 package com.web_advanced.controller;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 import com.vaadin.ui.Window;
-import com.web_advanced.model.Mysql;
-import com.web_advanced.model.Projet;
 import com.web_advanced.view.Ajout_projet;
 import com.web_advanced.view.Connexion;
 import com.web_advanced.view.Menu;
-import com.web_advanced.view.Test;
 
 public class Controller {
 	
@@ -34,8 +28,5 @@ public class Controller {
 		window.setContent(ap);
 	}
 	
-	public void test(){
-		Test tt = new Test();
-		window.setContent(tt);
-	}
+	
 }
