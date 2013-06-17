@@ -3,7 +3,6 @@ package com.web_advanced.view;
 import com.vaadin.ui.LoginForm;
 import com.vaadin.ui.LoginForm.LoginEvent;
 import com.vaadin.ui.VerticalLayout;
-import com.web_advanced.model.LDAPObject;
 import com.web_advanced.model.LDAPaccess;
 import com.web_advanced.model.User;
 

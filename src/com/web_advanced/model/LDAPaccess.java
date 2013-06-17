@@ -110,22 +110,22 @@ public class LDAPaccess implements Serializable {
 	 * @return objet LDAP ou null
 	 * @throws Exception
 	 */
-	public LDAPObject LDAPget(String numero) throws Exception {
+	public LDAPObject LDAPget(String mail) throws Exception {
 
 		// Initial context implementation
 		String INITCTX = "com.sun.jndi.ldap.LdapCtxFactory";
 		String MY_HOST = "ldap://ldap.isep.fr:389";
-		String MGR_DN = "uid=" + "rman-san" + ", "
-				+ "ou=People, dc=isep.fr";
-		String MGR_PW = "255CY73y";//mot de passse moodle
+		String MGR_DN = "uid=" + "rman-san" + ", " + "ou=People, dc=isep.fr";
+		String MGR_PW = "255CY73y";// mot de passse moodle
 		String MY_SEARCHBASE = "dc=isep.fr";
-		String MY_FILTER = "(employeeNumber=" + numero + ")";
-
+		// String MY_FILTER = "(employeeNumber=" + numero + ")";
+		String MY_FILTER = "(mail=" + mail + ")";
 		String login = null;
 		String nom = null;
 		String type = null;
 		String employeeNumber = null;
-		String mail = null;
+		//String mail = null;
+		String numero = null;
 		String messageErreur = "Login invalide";
 		try {
 
