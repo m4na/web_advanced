@@ -14,8 +14,6 @@ public class Mysql {
 	ResultSet rs = null;
 	
 	public Mysql() {
-		System.out.println("MySQL Connect Example.");
-		
 		String url = "jdbc:mysql://localhost:3306/";
 		String dbName = "web_advanced";
 		String driver = "com.mysql.jdbc.Driver";

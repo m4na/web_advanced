@@ -3,7 +3,8 @@ package com.web_advanced.view;
 import com.vaadin.ui.LoginForm;
 import com.vaadin.ui.LoginForm.LoginEvent;
 import com.vaadin.ui.VerticalLayout;
-import com.web_advanced.model.LDAPObject;
+import com.vaadin.ui.Window;
+import com.web_advanced.controller.Controller;
 import com.web_advanced.model.LDAPaccess;
 import com.web_advanced.model.User;
 
@@ -22,7 +23,12 @@ public class Connexion extends VerticalLayout {
 			public void onLogin(LoginEvent event) {
 				String id = event.getLoginParameter("username");
 				String pwd = event.getLoginParameter("password");
-				User.connexion(LDAP_access, id, pwd);
+				User user = User.connexion(LDAP_access, id, pwd);
+				if(user != null){
+					Window w = new Window();
+					Controller co = new Controller(w);
+					getApplication().getMainWindow().setContent(co.projectList(user));
+				}
 			}
 		});
 		addComponent(login);

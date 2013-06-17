@@ -19,7 +19,11 @@ public class Ajout_projet extends VerticalLayout {
 	private final Button save = new Button("Ajouter");
 
 	public Ajout_projet() {
-
+		
+		//add the menu
+		Menu menu = new Menu();
+		addComponent(menu.getMenubar());
+		
 		setSpacing(true);
 		addComponent(name);
 		addComponent(desc);

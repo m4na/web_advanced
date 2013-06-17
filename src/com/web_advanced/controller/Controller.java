@@ -1,9 +1,11 @@
 package com.web_advanced.controller;
 
 import com.vaadin.ui.Window;
+import com.web_advanced.model.User;
 import com.web_advanced.view.Ajout_projet;
 import com.web_advanced.view.Connexion;
 import com.web_advanced.view.Menu;
+import com.web_advanced.view.ProjectsList;
 
 public class Controller {
 	
@@ -18,15 +20,17 @@ public class Controller {
 		window.setContent(c);
 	}
 	
-	public void greeting(){
-		Menu ac = new Menu();
-		window.setContent(ac);
-	}
-	
-	public void add_project(){
+	public Ajout_projet addProject(){
 		Ajout_projet ap = new Ajout_projet();
-		window.setContent(ap);
+		return ap;
 	}
 	
+	public ProjectsList projectList(User user){
+		
+		//get all user projects
+		user.listProject();
+		ProjectsList pl = new ProjectsList();
+		return pl;
+	}
 	
 }
