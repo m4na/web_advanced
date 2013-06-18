@@ -102,5 +102,54 @@ public class User extends Mysql {
 	public void setType(String type) {
 		this.type = type;
 	}
+	
+	public boolean isProject(Projet projet){
+		Mysql mysql = new Mysql();
+		String sql = "SELECT * FROM groupe_user_projet "
+				+ "INNER JOIN groupe_projet "
+				+ "ON groupe_user_projet.id_groupe_projet = groupe_projet.id "
+				+ "WHERE groupe_projet.id_projet = " + projet.getId() 
+				+ " AND groupe_user_projet.id_user = " + getId();
+		ResultSet rs = mysql.select(sql);
+		try {
+			if(rs.next()){
+				return true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	public boolean isTutor(Projet projet){
+		Mysql mysql = new Mysql();
+		String sql = "SELECT * FROM projet WHERE id = " + projet.getId() + " AND  tutor_id = " + getId() ;
+		ResultSet rs = mysql.select(sql);
+		try {
+			if(rs.next()){
+				return true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	public boolean isResponsible(Projet projet){
+		Mysql mysql = new Mysql();
+		String sql = "SELECT * FROM projet WHERE id = " + projet.getId() + " AND  responsible_id = " + getId() ;
+		ResultSet rs = mysql.select(sql);
+		try {
+			if(rs.next()){
+				return true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
 
 }
