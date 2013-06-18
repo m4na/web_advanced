@@ -4,13 +4,17 @@ public class Groupe_user_projet {
 
 	private int id;
 	private int id_user;
-	private int id_user_projet;
+	private int id_groupe_projet;
 	
 
 	public Groupe_user_projet(int id, int id_user, int id_user_projet) {
 		this.id = id;
 		this.id_user = id_user;
-		this.id_user_projet = id_user_projet;
+		this.id_groupe_projet = id_user_projet;
+		
+	}
+	
+	public Groupe_user_projet() {
 		
 	}
 
@@ -38,21 +42,21 @@ public class Groupe_user_projet {
 
 
 
-	public int getId_user_projet() {
-		return id_user_projet;
+	public int getId_groupe_projet() {
+		return id_groupe_projet;
 	}
 
 
 
-	public void setId_user_projet(int id_user_projet) {
-		this.id_user_projet = id_user_projet;
+	public void setId_groupe_projet(int id_user_projet) {
+		this.id_groupe_projet = id_user_projet;
 	}
 
 
 
 	public void insert(){
 		Mysql mysql = new Mysql();
-		String req = "INSERT INTO groupe_user_projet (id_user,id_user_projet) VALUES ("+id_user+","+id_user_projet+")"; 
+		String req = "INSERT INTO groupe_user_projet (id_user,id_groupe_projet) VALUES ("+id_user+","+id_groupe_projet+")"; 
 		mysql.update(req);
 		mysql.closeRequest();
 		mysql.closeConnexion();

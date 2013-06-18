@@ -42,7 +42,17 @@ public class Groupe_projet {
 		mysql.update(req);
 		mysql.closeRequest();
 		mysql.closeConnexion();
-
+		
+		mysql = new Mysql();
+		req = "SELECT * FROM groupe_projet ORDER BY id DESC";
+		ResultSet rs = mysql.select(req);
+		
+		try {
+			rs.next();
+			setId(Integer.parseInt(rs.getObject("id").toString()));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public Groupe_projet listGroup(Projet projet) {

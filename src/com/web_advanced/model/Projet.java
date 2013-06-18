@@ -119,7 +119,7 @@ public class Projet {
 			while (rs.next()) {
 				Groupe_projet gp = new Groupe_projet();
 				gp.setId(Integer.parseInt(rs.getObject("id").toString()));
-				gp.setId_projet(Integer.parseInt(rs.getObject("id_project").toString()));
+				gp.setId_projet(Integer.parseInt(rs.getObject("id_projet").toString()));
 				list.add(gp);
 			}
 		} catch (SQLException e) {
