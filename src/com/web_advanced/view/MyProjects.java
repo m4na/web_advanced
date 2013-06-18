@@ -21,9 +21,12 @@ public class MyProjects extends VerticalLayout {
 	User user;
 	Button searchProject;
 	Button addProject;
+	Controller controller;
 
 	public MyProjects(final Controller controller) {
 
+		this.controller = controller;
+		
 		// add the menu
 		Menu menu = new Menu(controller);
 		addComponent(menu.getMenubar());
@@ -35,7 +38,7 @@ public class MyProjects extends VerticalLayout {
         user = (User) controller.getContext().getHttpSession().getAttribute("user");
         setList(user.listProject(0), bList);
         
-        projectNameResponsible = new Label("Liste des projets auquels vous √™tre responsable :");
+        projectNameResponsible = new Label("Liste des projets auquels vous êtes responsable :");
         addComponent(projectNameResponsible);
         bList = new ArrayList<Button>();
         user = (User) controller.getContext().getHttpSession().getAttribute("user");
@@ -76,11 +79,12 @@ public class MyProjects extends VerticalLayout {
 			Button b = new Button(projets.get(i).getName());
 			b.setStyleName(BaseTheme.BUTTON_LINK);
 			b.setDescription(projets.get(i).getDescription());
+			final Projet current = projets.get(i);
 			b.addListener(new ClickListener() {
 
 				@Override
 				public void buttonClick(ClickEvent event) {
-					// TODO Auto-generated method stub
+					controller.getWindow().setContent(controller.projectView(current));
 
 				}
 			});
