@@ -24,7 +24,7 @@ public class Ajout_projet extends VerticalLayout {
 	LDAPaccess LDAP_access = new LDAPaccess();
 
 	
-	public Ajout_projet(Controller controller) {
+	public Ajout_projet(final Controller controller) {
 		
 		//add the menu
 		Menu menu = new Menu(controller);
@@ -62,6 +62,7 @@ public class Ajout_projet extends VerticalLayout {
 				}
 
 				projet.insert();
+				controller.getWindow().setContent(controller.myProject(null));
 
 			}
 		});
