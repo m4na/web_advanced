@@ -18,7 +18,10 @@ public class Menu extends VerticalLayout {
         final MenuBar.MenuItem Profil = menubar.addItem("Profil", null);
         final MenuBar.MenuItem Projets = menubar.addItem("Projets", null);
         final MenuBar.MenuItem Deconnexion = menubar.addItem("Déconnexion", null);
+        
+        
         //addComponent(menubar);
+        
     }
     
     public MenuBar getMenubar(){

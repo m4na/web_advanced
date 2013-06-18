@@ -52,7 +52,9 @@ public class Mysql {
 	
 	public void closeRequest(){
 		try {
-			rs.close();
+			if(rs!=null){
+				rs.close();
+			}
 			st.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
