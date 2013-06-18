@@ -27,7 +27,7 @@ public class Ajout_projet extends VerticalLayout {
 	public Ajout_projet(Controller controller) {
 		
 		//add the menu
-		Menu menu = new Menu();
+		Menu menu = new Menu(controller);
 		addComponent(menu.getMenubar());
 		
 		setSpacing(true);
