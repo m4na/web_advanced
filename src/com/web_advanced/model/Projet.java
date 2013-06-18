@@ -69,6 +69,32 @@ public class Projet {
 	public int getResponsible_id() {
 		return responsible_id;
 	}
+	
+	public String getResponsible(){
+		LDAPaccess LDAP_access = new LDAPaccess();
+		String name = null;
+		try {
+			LDAPObject obj = LDAP_access.LDAPget2(String.valueOf(responsible_id));
+			name = obj.getNom();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return name;
+	}
+	
+	public String getTutor(){
+		LDAPaccess LDAP_access = new LDAPaccess();
+		String name = null;
+		try {
+			LDAPObject obj = LDAP_access.LDAPget2(String.valueOf(tutor_id));
+			name = obj.getNom();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return name;
+	}
 
 	public void setResponsible_id(int responsible_id) {
 		this.responsible_id = responsible_id;
