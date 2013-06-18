@@ -38,7 +38,7 @@ public class MyProjects extends VerticalLayout {
         user = (User) controller.getContext().getHttpSession().getAttribute("user");
         setList(user.listProject(0), bList);
         
-        projectNameResponsible = new Label("Liste des projets auquels vous êtes responsable :");
+        projectNameResponsible = new Label("Liste des projets auquels vous √™tes responsable :");
         addComponent(projectNameResponsible);
         bList = new ArrayList<Button>();
         user = (User) controller.getContext().getHttpSession().getAttribute("user");
