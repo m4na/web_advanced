@@ -108,6 +108,26 @@ public class Projet {
 		mysql.closeConnexion();
 	}
 	
+	public List<Groupe_projet> listGroup(){
+		Mysql mysql = new Mysql();
+		String sql = "SELECT * FROM groupe_projet WHERE id_projet="+id;
+		ResultSet rs = mysql.select(sql);
+		
+		List <Groupe_projet> list = new ArrayList<Groupe_projet>();
+		
+		try {
+			while (rs.next()) {
+				Groupe_projet gp = new Groupe_projet();
+				gp.setId(Integer.parseInt(rs.getObject("id").toString()));
+				gp.setId_projet(Integer.parseInt(rs.getObject("id_project").toString()));
+				list.add(gp);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
 	public static List<Projet> findProjects(String search){
 		Mysql mysql = new Mysql();
 		String sql = "SELECT * FROM projet WHERE name LIKE '%"+search+"%'";
