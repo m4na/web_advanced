@@ -19,7 +19,6 @@ public class Controller{
 	
 	public void index(WebApplicationContext context){
 		this.context = context;
-		context.getHttpSession().setAttribute("test", "aa");
 		Connexion c = new Connexion(this);
 		window.setContent(c);
 	}
