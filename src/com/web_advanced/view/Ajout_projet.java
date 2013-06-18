@@ -21,7 +21,7 @@ public class Ajout_projet extends VerticalLayout {
 	private final TextField responsable = new TextField("Responsable (mail isep) :");
 	private final Button save = new Button("Ajouter");
 	
-	LDAPaccess LDAP_access = new LDAPaccess();;
+	LDAPaccess LDAP_access = new LDAPaccess();
 
 	
 	public Ajout_projet(Controller controller) {
