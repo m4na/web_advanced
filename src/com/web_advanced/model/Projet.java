@@ -1,5 +1,10 @@
 package com.web_advanced.model;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Projet {
 
 	private int id;
@@ -75,15 +80,30 @@ public class Projet {
 		mysql.update(req);
 		mysql.closeRequest();
 		mysql.closeConnexion();
-		/*ResultSet rs = mysql.request("SELECT * FROM projet");
+	}
+	
+	public static List<Projet> findProjects(String search){
+		Mysql mysql = new Mysql();
+		String sql = "SELECT * FROM projet WHERE name LIKE '%"+search+"%'";
+		ResultSet rs = mysql.select(sql);
+		
+		List<Projet> list = new ArrayList<Projet>();
+		
 		try {
 			while (rs.next()) {
-				System.out.println(rs.getObject(1) + " " + rs.getObject(2)
-						+ " " + rs.getObject(3));
+				Projet p = new Projet();
+				p.setId(Integer.parseInt(rs.getObject("id").toString()));
+				p.setName(rs.getObject("name").toString());
+				p.setDescription(rs.getObject("description").toString());
+				p.setOwner(rs.getObject("owner").toString());
+				p.setTutor_id(Integer.parseInt(rs.getObject("tutor_id").toString()));
+				p.setResponsible_id(Integer.parseInt(rs.getObject("responsible_id").toString()));
+				list.add(p);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}*/
+		}
+		return list;
 	}
 
 }
