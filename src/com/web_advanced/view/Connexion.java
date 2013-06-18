@@ -29,7 +29,7 @@ public class Connexion extends VerticalLayout {
 				User user = User.connexion(LDAP_access, id, pwd);
 				if(user != null){
 					
-					getApplication().getMainWindow().setContent(controller.projectList(user));
+					getApplication().getMainWindow().setContent(controller.myProject(user));
 				}
 			}
 		});

@@ -41,7 +41,7 @@ public class Menu extends VerticalLayout {
     }
     
     private void locationProjects(){
-    	c.getWindow().setContent(c.projectList(null));
+    	c.getWindow().setContent(c.myProject(null));
     }
 
     

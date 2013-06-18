@@ -7,6 +7,7 @@ import com.web_advanced.model.User;
 import com.web_advanced.view.AddGroup;
 import com.web_advanced.view.Ajout_projet;
 import com.web_advanced.view.Connexion;
+import com.web_advanced.view.MyProjects;
 import com.web_advanced.view.ProjectsList;
 
 public class Controller {
@@ -40,9 +41,20 @@ public class Controller {
 		}
 		//get all user projects
 		user = (User) context.getHttpSession().getAttribute("user");
-		user.listProject();
+		user.listProject(0);
 		ProjectsList pl = new ProjectsList(this);
 		return pl;
+	}
+	
+	public MyProjects  myProject(User user){
+		if (user != null) {
+			context.getHttpSession().setAttribute("user", user);
+		}
+		//get all user projects
+		user = (User) context.getHttpSession().getAttribute("user");
+		user.listProject(0);
+		MyProjects mp = new MyProjects(this);
+		return mp;
 	}
 
 	public WebApplicationContext getContext() {

@@ -4,10 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.vaadin.ui.Button;
-import com.vaadin.ui.TextField;
-import com.vaadin.ui.Window;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
+import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.BaseTheme;
 import com.web_advanced.controller.Controller;
@@ -15,7 +14,6 @@ import com.web_advanced.model.Projet;
 
 public class ProjectsList extends VerticalLayout{
 
-	Button add;
 	TextField projectName;
 	Button search;
 	List<Button> bList;
@@ -30,17 +28,7 @@ public class ProjectsList extends VerticalLayout{
 		//display projects list
 		//setList();
 		
-		//add button
-        add = new Button("Ajouter un projet");
-        addComponent(add);
-        add.addListener(new ClickListener() {
-			
-			@Override
-			public void buttonClick(ClickEvent event) {
-				getApplication().getMainWindow().setContent(controller.addProject());
-				
-			}
-		});
+		
         projectName = new TextField("Nom du projet :");
         addComponent(projectName);
         search = new Button("Recherche");
