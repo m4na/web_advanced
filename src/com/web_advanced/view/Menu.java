@@ -16,7 +16,6 @@ public class Menu extends VerticalLayout {
 
         // Save reference to individual items so we can add sub-menu items to
         // them
-        final MenuBar.MenuItem Profil = menubar.addItem("Profil", null);
         final MenuBar.MenuItem Projets = menubar.addItem("Projets", new MenuBar.Command() {
             public void menuSelected(MenuBar.MenuItem selectedItem) {
             	locationProjects();

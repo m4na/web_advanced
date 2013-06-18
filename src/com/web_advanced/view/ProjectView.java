@@ -4,14 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.vaadin.ui.Button;
-import com.vaadin.ui.Label;
-import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
+import com.vaadin.ui.Label;
+import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.BaseTheme;
 import com.web_advanced.controller.Controller;
 import com.web_advanced.model.Groupe_projet;
 import com.web_advanced.model.Projet;
+import com.web_advanced.model.User;
 
 public class ProjectView extends VerticalLayout{
 
@@ -66,22 +67,29 @@ public class ProjectView extends VerticalLayout{
 		setSpacing(true);
 		addComponent(projectResponsible);
 		
-		//TODO add responsible and tutor test
+		//TODO add responsible or tutor test
 		//find all groups from the project
-		List<Groupe_projet> gps = projet.listGroup();
-		bList = new ArrayList<Button>();
-		setGroupUserList(gps, bList);
+		User user = (User) controller.getContext().getHttpSession().getAttribute("user");
+		if(user.isResponsible(projet) || user.isTutor(projet)){
+			List<Groupe_projet> gps = projet.listGroup();
+			bList = new ArrayList<Button>();
+			setGroupUserList(gps, bList);
+		}
+		
 		
 		//TODO test if responsible
-		createGroup = new Button("Créer un groupe");
-		createGroup.addListener(new ClickListener() {
-			
-			@Override
-			public void buttonClick(ClickEvent event) {
-				controller.getWindow().setContent(controller.addGroup(projet));
-			}
-		});
-		addComponent(createGroup);
+		if(user.isResponsible(projet)){
+			createGroup = new Button("Créer un groupe");
+			createGroup.addListener(new ClickListener() {
+				
+				@Override
+				public void buttonClick(ClickEvent event) {
+					controller.getWindow().setContent(controller.addGroup(projet));
+				}
+			});
+			addComponent(createGroup);
+		}
+		
 		
 	}
 	
