@@ -17,8 +17,11 @@ public class ProjectsList extends VerticalLayout{
 	TextField projectName;
 	Button search;
 	List<Button> bList;
+	Controller controller;
 	
 	public ProjectsList(final Controller controller){
+		
+		this.controller = controller;
 		
 		//add the menu
 		Menu menu = new Menu(controller);
@@ -59,12 +62,13 @@ public class ProjectsList extends VerticalLayout{
 			Button b = new Button(projets.get(i).getName());
 			b.setStyleName(BaseTheme.BUTTON_LINK);
 	        b.setDescription(projets.get(i).getDescription());
+	        final Projet current = projets.get(i);
 	        b.addListener(new ClickListener() {
-				
+	        	
 				@Override
 				public void buttonClick(ClickEvent event) {
 					// TODO Auto-generated method stub
-					
+					controller.getWindow().setContent(controller.projectView(current));
 				}
 			});
 	        bList.add(b);

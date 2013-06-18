@@ -8,6 +8,7 @@ import com.web_advanced.view.AddGroup;
 import com.web_advanced.view.Ajout_projet;
 import com.web_advanced.view.Connexion;
 import com.web_advanced.view.MyProjects;
+import com.web_advanced.view.ProjectView;
 import com.web_advanced.view.ProjectsList;
 
 public class Controller {
@@ -55,6 +56,10 @@ public class Controller {
 		user.listProject(0);
 		MyProjects mp = new MyProjects(this);
 		return mp;
+	}
+		public ProjectView projectView(Projet p){
+		ProjectView pv = new ProjectView(this, p);
+		return pv;
 	}
 
 	public WebApplicationContext getContext() {
