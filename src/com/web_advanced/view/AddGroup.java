@@ -14,7 +14,7 @@ public class AddGroup extends VerticalLayout {
 	public AddGroup(final Controller controller, Projet projet) {
 
 		// add the menu
-		Menu menu = new Menu();
+		Menu menu = new Menu(controller);
 		addComponent(menu.getMenubar());
 		
 		//display group list of the project

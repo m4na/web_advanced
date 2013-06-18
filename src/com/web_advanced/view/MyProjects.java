@@ -12,7 +12,7 @@ public class MyProjects extends VerticalLayout{
 	public MyProjects(final Controller controller) {
 
 		// add the menu
-		Menu menu = new Menu();
+		Menu menu = new Menu(controller);
 		addComponent(menu.getMenubar());
 
 		// display projects list

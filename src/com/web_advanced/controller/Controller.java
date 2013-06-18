@@ -1,6 +1,5 @@
 package com.web_advanced.controller;
 
-import com.vaadin.Application;
 import com.vaadin.terminal.gwt.server.WebApplicationContext;
 import com.vaadin.ui.Window;
 import com.web_advanced.model.Projet;
@@ -24,8 +23,13 @@ public class Controller {
 		Connexion c = new Connexion(this);
 		window.setContent(c);
 	}
-
-	public Ajout_projet addProject() {
+	
+	public Connexion index(){
+		Connexion c = new Connexion(this);
+		return c;
+	}
+	
+	public Ajout_projet addProject(){
 		Ajout_projet ap = new Ajout_projet(this);
 		return ap;
 	}
@@ -34,7 +38,8 @@ public class Controller {
 		if (user != null) {
 			context.getHttpSession().setAttribute("user", user);
 		}
-		// get all user projects
+		//get all user projects
+		user = (User) context.getHttpSession().getAttribute("user");
 		user.listProject();
 		ProjectsList pl = new ProjectsList(this);
 		return pl;
@@ -49,4 +54,7 @@ public class Controller {
 		return ag;
 	}
 
+	public Window getWindow(){
+		return window;
+	}
 }
