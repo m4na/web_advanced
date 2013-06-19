@@ -7,9 +7,12 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.Panel;
+import com.vaadin.ui.Upload;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.themes.BaseTheme;
 import com.web_advanced.controller.Controller;
+import com.web_advanced.controller.FileUploader;
 import com.web_advanced.model.Groupe_projet;
 import com.web_advanced.model.Projet;
 import com.web_advanced.model.User;
@@ -67,7 +70,7 @@ public class ProjectView extends VerticalLayout{
 		setSpacing(true);
 		addComponent(projectResponsible);
 		
-		//TODO add responsible or tutor test
+		//add responsible or tutor test
 		//find all groups from the project
 		User user = (User) controller.getContext().getHttpSession().getAttribute("user");
 		if(user.isResponsible(projet) || user.isTutor(projet)){
@@ -77,7 +80,7 @@ public class ProjectView extends VerticalLayout{
 		}
 		
 		
-		//TODO test if responsible
+		//test if responsible
 		if(user.isResponsible(projet)){
 			createGroup = new Button("Créer un groupe");
 			createGroup.addListener(new ClickListener() {
@@ -89,6 +92,21 @@ public class ProjectView extends VerticalLayout{
 			});
 			addComponent(createGroup);
 		}
+		
+		// Create the upload with a caption and set receiver later
+		Upload upload = new Upload("Upload Image Here", null);
+		upload.setButtonCaption("Start Upload");
+		        
+		// Put the upload component in a panel
+		Panel panel = new Panel("Cool Image Storage");
+		panel.addComponent(upload);
+		
+		addComponent(panel);
+		        
+
+		FileUploader uploader = new FileUploader("test"); 
+		upload.setReceiver(uploader);
+		upload.addListener(uploader);
 		
 		
 	}
