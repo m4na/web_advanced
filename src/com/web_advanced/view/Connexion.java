@@ -1,15 +1,14 @@
 package com.web_advanced.view;
 
-import javax.servlet.http.HttpSession;
-
-import com.vaadin.terminal.gwt.server.WebApplicationContext;
 import com.vaadin.ui.LoginForm;
 import com.vaadin.ui.LoginForm.LoginEvent;
 import com.vaadin.ui.VerticalLayout;
-import com.vaadin.ui.Window;
 import com.web_advanced.controller.Controller;
 import com.web_advanced.model.LDAPaccess;
 import com.web_advanced.model.User;
+
+
+
 
 @SuppressWarnings("serial")
 public class Connexion extends VerticalLayout {
