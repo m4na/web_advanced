@@ -151,5 +151,22 @@ public class User extends Mysql {
 		}
 		return false;
 	}
+	
+	public boolean isGroupProject(Groupe_user_projet gup){
+		Mysql mysql = new Mysql();
+		String sql = "SELECT * FROM groupe_user_projet "
+				+ "WHERE groupe_user_projet.id_groupe_projet = " + gup.getId() 
+				+ " AND groupe_user_projet.id_user = " + getId();
+		ResultSet rs = mysql.select(sql);
+		try {
+			if(rs.next()){
+				return true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
 
 }

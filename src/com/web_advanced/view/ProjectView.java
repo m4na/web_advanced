@@ -14,6 +14,7 @@ import com.vaadin.ui.themes.BaseTheme;
 import com.web_advanced.controller.Controller;
 import com.web_advanced.controller.FileUploader;
 import com.web_advanced.model.Groupe_projet;
+import com.web_advanced.model.Groupe_user_projet;
 import com.web_advanced.model.Projet;
 import com.web_advanced.model.User;
 
@@ -138,6 +139,15 @@ public class ProjectView extends VerticalLayout{
 		for (int i = 0; i < bList.size(); i++) {
 			setSpacing(true);
 			addComponent(bList.get(i));
+		}
+	}
+	
+	public void setUserList(Groupe_user_projet gup) {
+		List<User> listUser = gup.listUser(gup.getId());
+		for(int i=0;i<=listUser.size();i++){
+			Label nameUser = new Label(listUser.get(i).getName());
+			setSpacing(true);
+			addComponent(nameUser);
 		}
 	}
 	
