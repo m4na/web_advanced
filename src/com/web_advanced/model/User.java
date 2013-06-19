@@ -171,9 +171,9 @@ public class User extends Mysql {
 	
 	public int getGroupProject(Projet p){
 		Mysql mysql = new Mysql();
-		String sql = "SELECT * FROM groupe_projet" +
-				"INNER JOIN groupe_user_projet" +
-				"ON groupe_projet.id = groupe_user_projet.id_groupe_projet" +
+		String sql = "SELECT * FROM groupe_projet " +
+				"INNER JOIN groupe_user_projet " +
+				"ON groupe_projet.id = groupe_user_projet.id_groupe_projet " +
 				"WHERE groupe_user_projet.id_user = "+getId()+
 				" AND groupe_projet.id_projet = "+p.getId();
 		ResultSet rs = mysql.select(sql);

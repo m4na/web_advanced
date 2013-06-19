@@ -20,52 +20,52 @@ import com.web_advanced.model.Groupe_user_projet;
 import com.web_advanced.model.Projet;
 import com.web_advanced.model.User;
 
-public class ProjectView extends VerticalLayout{
+public class ProjectView extends VerticalLayout {
 
 	Label projectName;
 	Label projectDescription;
 	Label projectOwner;
 	Label projectTutor;
 	Label projectResponsible;
-	
+
 	List<Button> bList;
-	
+
 	Controller controller;
-	
+
 	Button createGroup;
-	
+
 	Groupe_user_projet gup;
-	
+
 	Panel panel = null;
-	
-	public ProjectView(final Controller controller, final Projet projet){
-		
+
+	public ProjectView(final Controller controller, final Projet projet) {
+
 		this.controller = controller;
-		
-		//add the menu
+
+		// add the menu
 		Menu menu = new Menu(controller);
 		addComponent(menu.getMenubar());
-		
+
 		projectName = new Label();
-		projectName.setValue("Nom: "+projet.getName());
+		projectName.setValue("Nom: " + projet.getName());
 		projectName.setContentMode(Label.CONTENT_TEXT);
-		
+
 		projectDescription = new Label();
-		projectDescription.setValue("Description: "+projet.getDescription());
+		projectDescription.setValue("Description: " + projet.getDescription());
 		projectDescription.setContentMode(Label.CONTENT_TEXT);
-		
+
 		projectOwner = new Label();
-		projectOwner.setValue("Owner: "+projet.getOwner());
+		projectOwner.setValue("Owner: " + projet.getOwner());
 		projectOwner.setContentMode(Label.CONTENT_TEXT);
-		
+
 		projectTutor = new Label();
-		projectTutor.setValue("Tuteur: "+projet.getTutor());
+		projectTutor.setValue("Tuteur: " + projet.getTutor());
 		projectTutor.setContentMode(Label.CONTENT_TEXT);
-		
+
 		projectResponsible = new Label();
-		projectResponsible.setValue("Responsable: "+projet.getResponsible());
+		projectResponsible.setValue("Responsable: " + projet.getResponsible());
 		projectResponsible.setContentMode(Label.CONTENT_TEXT);
-		
+
 		setSpacing(true);
 		addComponent(projectName);
 		setSpacing(true);
@@ -76,39 +76,40 @@ public class ProjectView extends VerticalLayout{
 		addComponent(projectTutor);
 		setSpacing(true);
 		addComponent(projectResponsible);
-		
-		//add responsible or tutor test
-		//find all groups from the project
-		User user = (User) controller.getContext().getHttpSession().getAttribute("user");
-		if(user.isResponsible(projet) || user.isTutor(projet)){
+
+		// add responsible or tutor test
+		// find all groups from the project
+		User user = (User) controller.getContext().getHttpSession()
+				.getAttribute("user");
+		if (user.isResponsible(projet) || user.isTutor(projet)) {
 			List<Groupe_projet> gps = projet.listGroup();
 			bList = new ArrayList<Button>();
 			setGroupUserList(gps, bList);
 		}
-		
-		
-		//test if responsible
-		if(user.isResponsible(projet)){
+
+		// test if responsible
+		if (user.isResponsible(projet)) {
 			createGroup = new Button("Créer un groupe");
 			createGroup.addListener(new ClickListener() {
-				
+
 				@Override
 				public void buttonClick(ClickEvent event) {
-					controller.getWindow().setContent(controller.addGroup(projet));
+					controller.getWindow().setContent(
+							controller.addGroup(projet));
 				}
 			});
 			addComponent(createGroup);
 		}
-		
+
 		int idGroup = user.getGroupProject(projet);
-		if(idGroup!=0){
+		if (idGroup != 0) {
 			gup = new Groupe_user_projet();
 			gup.setId_groupe_projet(idGroup);
 			setUserList();
 		}
-		
+
 	}
-	
+
 	private void setGroupUserList(List<Groupe_projet> gps, List<Button> bList) {
 
 		// clear list
@@ -125,7 +126,7 @@ public class ProjectView extends VerticalLayout{
 
 				@Override
 				public void buttonClick(ClickEvent event) {
-					//TODO event 
+					// TODO event
 					gup = new Groupe_user_projet();
 					gup.setId_groupe_projet(current.getId());
 					setUserList();
@@ -140,14 +141,14 @@ public class ProjectView extends VerticalLayout{
 			addComponent(bList.get(i));
 		}
 	}
-	
+
 	private void setUserList() {
-		if(panel!=null){
+		if (panel != null) {
 			removeComponent(panel);
 		}
 		List<User> listUser = gup.listUser();
 		panel = new Panel("Groupe");
-		for(int i=0;i<listUser.size();i++){
+		for (int i = 0; i < listUser.size(); i++) {
 			Label nameUser = new Label(listUser.get(i).getName());
 			setSpacing(true);
 			panel.addComponent(nameUser);
@@ -157,38 +158,39 @@ public class ProjectView extends VerticalLayout{
 		// Create the upload with a caption and set receiver later
 		Upload upload = new Upload("Upload Image Here", null);
 		upload.setButtonCaption("Start Upload");
-		        
-		FileUploader uploader = new FileUploader(String.valueOf(gup.getId_groupe_projet())); 
-		//list files 
-		File[] fileList = uploader.listFiles();
-		for (int i = 0; i < fileList.length; i++) 
-		{
-			if (fileList[i].isFile()) 
-			{
-				System.out.println(fileList[i].getName());
-				Button b = new Button(fileList[i].getName());
-				b.setStyleName(BaseTheme.BUTTON_LINK);
-				final File current = fileList[i];
-				b.addListener(new ClickListener() {
 
-					@Override
-					public void buttonClick(ClickEvent event) {
-						FileResource resource = new FileResource(current, getApplication());
-						controller.getWindow().open(resource);
-					}
-				});
-				panel.addComponent(b);
+		FileUploader uploader = new FileUploader(String.valueOf(gup
+				.getId_groupe_projet()));
+		// list files
+		File[] fileList = uploader.listFiles();
+		if (fileList != null) {
+			for (int i = 0; i < fileList.length; i++) {
+				if (fileList[i].isFile()) {
+					System.out.println(fileList[i].getName());
+					Button b = new Button(fileList[i].getName());
+					b.setStyleName(BaseTheme.BUTTON_LINK);
+					final File current = fileList[i];
+					b.addListener(new ClickListener() {
+
+						@Override
+						public void buttonClick(ClickEvent event) {
+							FileResource resource = new FileResource(current,
+									getApplication());
+							controller.getWindow().open(resource);
+						}
+					});
+					panel.addComponent(b);
+				}
 			}
 		}
-		
+
 		// Put the upload component in a panel
 		panel.addComponent(upload);
-		
+
 		addComponent(panel);
-		        
-		
+
 		upload.setReceiver(uploader);
 		upload.addListener(uploader);
 	}
-	
+
 }
