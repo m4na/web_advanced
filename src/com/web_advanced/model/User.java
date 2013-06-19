@@ -168,5 +168,27 @@ public class User extends Mysql {
 		}
 		return false;
 	}
+	
+	public int getGroupProject(Projet p){
+		Mysql mysql = new Mysql();
+		String sql = "SELECT * FROM groupe_projet" +
+				"INNER JOIN groupe_user_projet" +
+				"ON groupe_projet.id = groupe_user_projet.id_groupe_projet" +
+				"WHERE groupe_user_projet.id_user = "+getId()+
+				" AND groupe_projet.id_projet = "+p.getId();
+		ResultSet rs = mysql.select(sql);
+		if(rs==null){
+			return 0;
+		}
+		try {
+			if(rs.next()){
+				return Integer.parseInt(rs.getObject("groupe_projet.id").toString());
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
+	}
 
 }

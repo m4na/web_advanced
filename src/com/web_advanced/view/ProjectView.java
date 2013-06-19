@@ -1,8 +1,10 @@
 package com.web_advanced.view;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.vaadin.terminal.FileResource;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
@@ -31,6 +33,10 @@ public class ProjectView extends VerticalLayout{
 	Controller controller;
 	
 	Button createGroup;
+	
+	Groupe_user_projet gup;
+	
+	Panel panel = null;
 	
 	public ProjectView(final Controller controller, final Projet projet){
 		
@@ -94,21 +100,12 @@ public class ProjectView extends VerticalLayout{
 			addComponent(createGroup);
 		}
 		
-		// Create the upload with a caption and set receiver later
-		Upload upload = new Upload("Upload Image Here", null);
-		upload.setButtonCaption("Start Upload");
-		        
-		// Put the upload component in a panel
-		Panel panel = new Panel("Cool Image Storage");
-		panel.addComponent(upload);
-		
-		addComponent(panel);
-		        
-
-		FileUploader uploader = new FileUploader("test"); 
-		upload.setReceiver(uploader);
-		upload.addListener(uploader);
-		
+		int idGroup = user.getGroupProject(projet);
+		if(idGroup!=0){
+			gup = new Groupe_user_projet();
+			gup.setId_groupe_projet(idGroup);
+			setUserList();
+		}
 		
 	}
 	
@@ -129,7 +126,9 @@ public class ProjectView extends VerticalLayout{
 				@Override
 				public void buttonClick(ClickEvent event) {
 					//TODO event 
-					//controller.getWindow().setContent(controller.projectView(current));
+					gup = new Groupe_user_projet();
+					gup.setId_groupe_projet(current.getId());
+					setUserList();
 				}
 			});
 			bList.add(b);
@@ -142,13 +141,54 @@ public class ProjectView extends VerticalLayout{
 		}
 	}
 	
-	public void setUserList(Groupe_user_projet gup) {
-		List<User> listUser = gup.listUser(gup.getId());
-		for(int i=0;i<=listUser.size();i++){
+	private void setUserList() {
+		if(panel!=null){
+			removeComponent(panel);
+		}
+		List<User> listUser = gup.listUser();
+		panel = new Panel("Groupe");
+		for(int i=0;i<listUser.size();i++){
 			Label nameUser = new Label(listUser.get(i).getName());
 			setSpacing(true);
-			addComponent(nameUser);
+			panel.addComponent(nameUser);
 		}
+		setSpacing(true);
+		setSpacing(true);
+		// Create the upload with a caption and set receiver later
+		Upload upload = new Upload("Upload Image Here", null);
+		upload.setButtonCaption("Start Upload");
+		        
+		FileUploader uploader = new FileUploader(String.valueOf(gup.getId_groupe_projet())); 
+		//list files 
+		File[] fileList = uploader.listFiles();
+		for (int i = 0; i < fileList.length; i++) 
+		{
+			if (fileList[i].isFile()) 
+			{
+				System.out.println(fileList[i].getName());
+				Button b = new Button(fileList[i].getName());
+				b.setStyleName(BaseTheme.BUTTON_LINK);
+				final File current = fileList[i];
+				b.addListener(new ClickListener() {
+
+					@Override
+					public void buttonClick(ClickEvent event) {
+						FileResource resource = new FileResource(current, getApplication());
+						controller.getWindow().open(resource);
+					}
+				});
+				panel.addComponent(b);
+			}
+		}
+		
+		// Put the upload component in a panel
+		panel.addComponent(upload);
+		
+		addComponent(panel);
+		        
+		
+		upload.setReceiver(uploader);
+		upload.addListener(uploader);
 	}
 	
 }

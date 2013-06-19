@@ -70,9 +70,9 @@ public class Groupe_user_projet {
 	}
 	
 	// renvoie tout les utilisateurs d'un même groupe
-	public List<User> listUser(int id) {
+	public List<User> listUser() {
 		Mysql mysql = new Mysql();
-		String sql = "SELECT * FROM groupe_user_projet WHERE groupe_user_projet.id_groupe_projet = " + id;
+		String sql = "SELECT * FROM groupe_user_projet WHERE groupe_user_projet.id_groupe_projet = " + id_groupe_projet;
 		ResultSet rs = mysql.select(sql);
 		List<User> list = new ArrayList<User>();
 		try {

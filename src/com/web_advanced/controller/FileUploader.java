@@ -37,4 +37,11 @@ public class FileUploader implements Receiver, SucceededListener {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	public File[] listFiles(){
+		File folder = new File(path+directory);
+		File[] listOfFiles = folder.listFiles(); 
+ 
+		return listOfFiles;
+	}
 };
