@@ -115,8 +115,8 @@ public class LDAPaccess implements Serializable {
 		// Initial context implementation
 		String INITCTX = "com.sun.jndi.ldap.LdapCtxFactory";
 		String MY_HOST = "ldap://ldap.isep.fr:389";
-		String MGR_DN = "uid=" + "rman-san" + ", " + "ou=People, dc=isep.fr";
-		String MGR_PW = "255CY73y";// mot de passse moodle
+		String MGR_DN = "uid=" + "IDENTIFIANT" + ", " + "ou=People, dc=isep.fr";
+		String MGR_PW = "MOTDEPASSE";// mot de passse moodle
 		String MY_SEARCHBASE = "dc=isep.fr";
 		// String MY_FILTER = "(employeeNumber=" + numero + ")";
 		String MY_FILTER = "(mail=" + mail + ")";
@@ -195,8 +195,8 @@ public class LDAPaccess implements Serializable {
 		// Initial context implementation
 		String INITCTX = "com.sun.jndi.ldap.LdapCtxFactory";
 		String MY_HOST = "ldap://ldap.isep.fr:389";
-		String MGR_DN = "uid=" + "rman-san" + ", " + "ou=People, dc=isep.fr";
-		String MGR_PW = "255CY73y";// mot de passse moodle
+		String MGR_DN = "uid=" + "IDENTIFIANT" + ", " + "ou=People, dc=isep.fr";
+		String MGR_PW = "MOTDEPASSE";// mot de passse moodle
 		String MY_SEARCHBASE = "dc=isep.fr";
 		String MY_FILTER = "(employeeNumber=" + numero + ")";
 		String login = null;
